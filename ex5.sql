@@ -74,6 +74,8 @@ LEFT JOIN website_sessions
     AND website_sessions.created_at BETWEEN '2014-01-01' AND '2014-02-01'
 GROUP BY 1;
 
+SELECT  * FROM first_pageviews_demo; -- QA testing
+
 -- now we need to bring in the landing page to each session 
 DROP TEMPORARY TABLE IF EXISTS sessions_w_lp_demo;
 CREATE TEMPORARY TABLE sessions_w_lp_demo
@@ -84,6 +86,8 @@ SELECT
 FROM first_pageviews_demo
 	LEFT JOIN website_pageviews
 		ON website_pageviews.website_pageview_id = first_pageviews_demo.min_pv_id;
+        
+SELECT  * FROM sessions_w_lp_demo; -- QA testing
 
 -- next, we make a table to include a count of pageviews per session
 
@@ -98,6 +102,8 @@ LEFT JOIN website_pageviews
     ON website_pageviews.website_session_id = sessions_w_lp_demo.website_session_id
 GROUP BY 1, 2
 HAVING COUNT(website_pageviews.website_pageview_id) = 1;
+
+SELECT  * FROM bounced_sessions_only; -- QA testing
 
 SELECT
 	sessions_w_lp_demo.landing_page,
@@ -120,4 +126,7 @@ FROM sessions_w_lp_demo
 	LEFT JOIN bounced_sessions_only
 		ON sessions_w_lp_demo.website_session_id = bounced_sessions_only.website_session_id
 GROUP BY 1
-ORDER BY 4 DESC
+ORDER BY 4 DESC;
+-- 08 =========================================================================
+
+
