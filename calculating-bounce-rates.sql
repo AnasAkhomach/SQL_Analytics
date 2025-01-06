@@ -22,7 +22,6 @@ GROUP BY 1;
 
 SELECT  * FROM first_pageviews_demo; -- QA testing, what is returned is the first page viewed by session (each session!)
 -- STEP 1: find the first websit_pageview_id for relevant sessions >>> [DONE]
-
 -- now we need to bring in the landing page to each session
 -- we have alredy find the id of the first page visited each session, now we fetch it's URL
 DROP TEMPORARY TABLE IF EXISTS sessions_w_lp_url;
@@ -35,7 +34,8 @@ FROM first_pageviews_demo
 	LEFT JOIN website_pageviews
 		ON website_pageviews.website_pageview_id = first_pageviews_demo.min_pv_id;
         
-SELECT  * FROM sessions_w_lp_url; -- QA testing, this table returns the result of the previous query plus the URL column
+SELECT  * FROM sessions_w_lp_url; 
+-- QA testing, this table returns the result of the previous query plus the URL column
 -- STEP 2: Identify the landing page for each session >>> [DONE]
 -- next, we make a table to include a count of pageviews per session
 -- the previous table has unique sessions, we need to count for each session the nomber of page viewed
