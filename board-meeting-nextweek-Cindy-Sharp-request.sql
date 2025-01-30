@@ -1,18 +1,6 @@
 /*
 MID COURSE PROJECT QUESTIONS 
-	
-    Question 1: Gsearch seems to be the biggest driver of our business. Could you pull monthly trends for gsearch sessions and orders so that we can showcase
-    the growth there? 
-    
-	Question 2: Next, it would be great to see a similar monthly trend for Gsearch, but this time splitting out nonbrand and brand campaigns separately.
-    I am wondering if brand is picking up at all. If so, this is a good story to tell. 
-    
-	Question 3: While we're on Gsearch, could you dive into nonbrand, and pull monthly sessions and orders split by device type? I want to flex our
-    analytical muscles a little and show the board we really know our traffic sources. 
-    
-	Question 4: I'm worried that one of our more pessimistic board members may be concerned about the large % of traffic from Gsearch.
-    Can you pull monthly trends for Gsearch, alongside monthly trends for each of our other channels? 
-    
+	 
     Question 5: I'd like to tell the story of our website performance improvements over the course of the first 8 months. 
     Could you pull session to order conversion rates, by month? 
 	
@@ -27,3 +15,71 @@ MID COURSE PROJECT QUESTIONS
     page sessions 25:17 for the past month to understand monthly impact. 
 
 */
+
+-- Question 1: Gsearch seems to be the biggest driver of our business. Could you pull monthly trends for gsearch sessions and orders so that we can showcase
+-- the growth there? 
+
+select
+	year(website_sessions.created_at) as yr,
+	month(website_sessions.created_at) as mo,
+	count(distinct website_sessions.website_session_id) as sessions,
+	count(distinct orders.order_id) as orders
+from website_sessions
+	left join orders
+		on website_sessions.website_session_id = orders.website_session_id
+where website_sessions.utm_source = 'gsearch'
+	and website_sessions.created_at < '2012-11-27'
+group by 1, 2;
+
+-- Question 2: Next, it would be great to see a similar monthly trend for Gsearch, but this time splitting out nonbrand and brand campaigns separately.
+-- I am wondering if brand is picking up at all. If so, this is a good story to tell. 
+select
+	year(website_sessions.created_at) as yr,
+	month(website_sessions.created_at) as mo,
+	count(distinct website_sessions.website_session_id) as sessions,
+	count(distinct orders.order_id) as orders,
+    count(distinct case when website_sessions.utm_campaign = 'nonbrand' then website_sessions.website_session_id else null end) as nonbrand_campaign,
+    count(distinct case when website_sessions.utm_campaign = 'brand' then website_sessions.website_session_id else null end) as brand_campaign
+from website_sessions
+	left join orders
+		on website_sessions.website_session_id = orders.website_session_id
+where website_sessions.utm_source = 'gsearch'
+	and website_sessions.created_at < '2012-11-27'
+group by 1, 2;
+
+-- Question 3: While we're on Gsearch, could you dive into nonbrand, and pull monthly sessions and orders split by device type? I want to flex our
+-- analytical muscles a little and show the board we really know our traffic sources.
+
+select
+	year(website_sessions.created_at) as yr,
+	month(website_sessions.created_at) as mo,
+	-- count(distinct website_sessions.website_session_id) as sessions,
+	-- count(distinct orders.order_id) as orders,
+    count(distinct case when website_sessions.device_type = 'desktop' then website_sessions.website_session_id else null end) as desktop_sessions,
+	count(distinct case when website_sessions.device_type = 'desktop' then orders.order_id else null end) as desktop_orders,
+    count(distinct case when website_sessions.device_type = 'mobile' then website_sessions.website_session_id else null end) as moblie_sessions,
+    count(distinct case when website_sessions.device_type = 'mobile' then orders.order_id else null end) as moblie_orders
+
+from website_sessions
+	left join orders
+		on website_sessions.website_session_id = orders.website_session_id
+where website_sessions.utm_source = 'gsearch'
+	and website_sessions.created_at < '2012-11-27'
+    and website_sessions.utm_campaign = 'nonbrand'
+group by 1, 2;
+
+-- Question 4: I'm worried that one of our more pessimistic board members may be concerned about the large % of traffic from Gsearch.
+-- Can you pull monthly trends for Gsearch, alongside monthly trends for each of our other channels? 
+
+select
+	year(website_sessions.created_at) as yr,
+	month(website_sessions.created_at) as mo,
+	count(distinct website_sessions.website_session_id) as sessions,
+	count(distinct orders.order_id) as orders,
+    count(distinct case when website_sessions.utm_source = 'gsearch' then website_sessions.website_session_id else null end) as gsearch_campaign,
+    count(distinct case when website_sessions.utm_source <> 'gsearch' then website_sessions.website_session_id else null end) as other_campaign
+from website_sessions
+	left join orders
+		on website_sessions.website_session_id = orders.website_session_id
+where website_sessions.created_at < '2012-11-27'
+group by 1, 2;
