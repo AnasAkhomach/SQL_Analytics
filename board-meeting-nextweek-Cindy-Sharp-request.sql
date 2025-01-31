@@ -1,12 +1,6 @@
 /*
 MID COURSE PROJECT QUESTIONS 
-	 
-    Question 5: I'd like to tell the story of our website performance improvements over the course of the first 8 months. 
-    Could you pull session to order conversion rates, by month? 
-	
-    Question 6: For the gsearch lander test, please estimate the revenue that test earned us 
-    (Hint: Look at the increase in CVR from the test (Jun 19-Jul 28), and use nonbrand sessions and revenue since then to calculate incremental value) 
-
+	 	
 	Question 7: For the landing page test you analyzed previously, it would be great to show a full conversion funnel from each of the two pages to orders. 
     You can use the same time period you analyzed last time (Jun 19-Jul 28). 
 
@@ -78,14 +72,36 @@ select
 	-- count(distinct orders.order_id) as orders,
     count(distinct case when website_sessions.utm_source = 'gsearch' then website_sessions.website_session_id else null end) as gsearch_paid_session,
     count(distinct case when website_sessions.utm_source = 'bsearch' then website_sessions.website_session_id else null end) as bsearch_paid_session,
-    count(distinct case when website_sessions.utm_source is null 
-						and website_sessions.http_referer is not null 
+    count(distinct case when website_sessions.utm_source is null and website_sessions.http_referer is not null 
                         then website_sessions.website_session_id else null end) as organic_search_session,
-	count(distinct case when website_sessions.utm_source is null 
-						and website_sessions.http_referer is null 
+                        
+	count(distinct case when website_sessions.utm_source is null and website_sessions.http_referer is null 
                         then website_sessions.website_session_id else null end) as direct_type_in_session
 from website_sessions
 	left join orders
 		on website_sessions.website_session_id = orders.website_session_id
 where website_sessions.created_at < '2012-11-27'
 group by 1, 2;
+
+-- Question 5: I'd like to tell the story of our website performance improvements over the course of the first 8 months. 
+-- Could you pull session to order conversion rates, by month? 
+-- create temporary table sessions_and_orders_by_month
+select
+	year(website_sessions.created_at) as yr,
+	month(website_sessions.created_at) as mo,
+	count(distinct website_sessions.website_session_id) as sessions,
+	count(distinct orders.order_id) as orders
+from website_sessions
+	left join orders
+		on website_sessions.website_session_id = orders.website_session_id
+where website_sessions.utm_source = 'gsearch'
+	and website_sessions.created_at < '2012-11-27'
+group by 1, 2;
+
+select
+	yr, mo, sessions, orders,
+    (orders / sessions)  * 100 as conversion_rate
+from sessions_and_orders_by_month;
+
+-- Question 6: For the gsearch lander test, please estimate the revenue that test earned us 
+-- (Hint: Look at the increase in CVR from the test (Jun 19-Jul 28), and use nonbrand sessions and revenue since then to calculate incremental value) 
