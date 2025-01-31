@@ -74,10 +74,16 @@ group by 1, 2;
 select
 	year(website_sessions.created_at) as yr,
 	month(website_sessions.created_at) as mo,
-	count(distinct website_sessions.website_session_id) as sessions,
-	count(distinct orders.order_id) as orders,
-    count(distinct case when website_sessions.utm_source = 'gsearch' then website_sessions.website_session_id else null end) as gsearch_campaign,
-    count(distinct case when website_sessions.utm_source <> 'gsearch' then website_sessions.website_session_id else null end) as other_campaign
+	-- count(distinct website_sessions.website_session_id) as sessions,
+	-- count(distinct orders.order_id) as orders,
+    count(distinct case when website_sessions.utm_source = 'gsearch' then website_sessions.website_session_id else null end) as gsearch_paid_session,
+    count(distinct case when website_sessions.utm_source = 'bsearch' then website_sessions.website_session_id else null end) as bsearch_paid_session,
+    count(distinct case when website_sessions.utm_source is null 
+						and website_sessions.http_referer is not null 
+                        then website_sessions.website_session_id else null end) as organic_search_session,
+	count(distinct case when website_sessions.utm_source is null 
+						and website_sessions.http_referer is null 
+                        then website_sessions.website_session_id else null end) as direct_type_in_session
 from website_sessions
 	left join orders
 		on website_sessions.website_session_id = orders.website_session_id
