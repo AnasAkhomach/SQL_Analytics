@@ -32,6 +32,18 @@ from website_sessions
 where website_sessions.created_at > '2012-08-22'
 	and website_sessions.created_at < '2012-09-19'
     and utm_campaign = 'nonbrand'
-group by 1, 2
-    
+group by 1, 2;
+
+select
+	--              yearweek(created_at) as yrwk,
+	min(date(created_at)) as wk,
+    count(distinct case when utm_source = 'gsearch' and device_type = 'desktop' then website_session_id else null end) as gsearch_desk_session,
+    count(distinct case when utm_source = 'gsearch' and device_type = 'mobile' then website_session_id else null end) as gsearch_mob_session,
+    count(distinct case when utm_source = 'bsearch' and device_type = 'desktop' then website_session_id else null end) as bsearch_desk_session,
+    count(distinct case when utm_source = 'bsearch' and device_type = 'mobile' then website_session_id else null end) as bsearch_mob_session
+from website_sessions
+where created_at > '2012-11-04' 
+	and created_at < '2012-12-22'
+    and utm_campaign = 'nonbrand'
+group by yearweek(created_at)
     
