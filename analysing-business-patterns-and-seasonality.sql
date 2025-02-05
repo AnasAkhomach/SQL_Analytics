@@ -22,7 +22,7 @@ select
 	count(website_session_id) as sessions
 from website_sessions
 where created_at > '2012-09-15' and created_at < '2012-11-15'
-group by 1;
+group by 1; -- this is not the required query, the result is not correct
 
 SELECT 
     HOUR(created_at) AS hr,
@@ -31,4 +31,32 @@ SELECT
 FROM website_sessions
 WHERE created_at >= '2012-09-15' AND created_at < '2012-11-15'
 GROUP BY hr, weekday
-ORDER BY hr, weekday;
+ORDER BY hr, weekday; -- this is not the required format, the result is somehow correct
+
+
+SELECT
+    hr,
+    ROUND(mon / 8, 1) AS mon_avg, 
+    ROUND(tue / 8, 1) AS tue_avg, 
+    ROUND(wed / 8, 1) AS wed_avg, 
+    ROUND(thu / 8, 1) AS thu_avg, 
+    ROUND(fri / 8, 1) AS fri_avg, 
+    ROUND(sat / 8, 1) AS sat_avg, 
+    ROUND(sun / 8, 1) AS sun_avg
+FROM (
+    SELECT 
+        HOUR(created_at) AS hr,
+        COUNT(DISTINCT CASE WHEN WEEKDAY(created_at) = 0 THEN website_session_id ELSE NULL END) AS mon,
+        COUNT(DISTINCT CASE WHEN WEEKDAY(created_at) = 1 THEN website_session_id ELSE NULL END) AS tue,
+        COUNT(DISTINCT CASE WHEN WEEKDAY(created_at) = 2 THEN website_session_id ELSE NULL END) AS wed,
+        COUNT(DISTINCT CASE WHEN WEEKDAY(created_at) = 3 THEN website_session_id ELSE NULL END) AS thu,
+        COUNT(DISTINCT CASE WHEN WEEKDAY(created_at) = 4 THEN website_session_id ELSE NULL END) AS fri,
+        COUNT(DISTINCT CASE WHEN WEEKDAY(created_at) = 5 THEN website_session_id ELSE NULL END) AS sat,
+        COUNT(DISTINCT CASE WHEN WEEKDAY(created_at) = 6 THEN website_session_id ELSE NULL END) AS sun
+    FROM website_sessions
+    WHERE created_at >= '2012-09-15' AND created_at < '2012-11-15'
+    GROUP BY hr
+) sub_query
+GROUP BY hr
+ORDER BY hr;
+
