@@ -1,0 +1,5 @@
+-- STEP 1: select alla the pageviews with the relevant sessions
+-- STEP 2: figure out which pageview urls to look for
+-- STEP 3: pull all the pageviews and identify the funnel steps
+-- STEP 4: create a session level conversion funnel
+-- STEP 5: aggregate the data to assess the funnel performance
