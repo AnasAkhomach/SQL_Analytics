@@ -1,0 +1,4 @@
+-- STEP 1: find relevant '/products' pageviews with website_session_id
+-- STEP 2: find the next pageview_id that occurs AFTER the product pageview
+-- STEP 3: find the pageview_url associated with any applicable next pageview_id
+-- STEP 4: summarize the data and analyse the PRE vs the POST periods
