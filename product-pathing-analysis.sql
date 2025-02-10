@@ -86,9 +86,9 @@ select * from sessions_with_next_pv_url; 	-- QA Test
 select
 	time_period,
     count(distinct website_session_id) as sessions,
-    count(distinct case when next_pv_url is not null then website_session_id else null end) as bounced,
+    count(distinct case when next_pv_url is not null then website_session_id else null end) as not_bounced,
     count(distinct case when next_pv_url = '/the-original-mr-fuzzy' then website_session_id else null end) as to_mr_fuzzy,
-    count(distinct case when next_pv_url = '/the-forever-love-bear' then website_session_id else null end) as to_love_bear
+    count(distinct case when next_pv_url = '/the-forever-love-bear' then website_session_id else null end) as to_love_bear 
 from sessions_with_next_pv_url
 group by 1;
 
