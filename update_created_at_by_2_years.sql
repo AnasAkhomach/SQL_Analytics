@@ -2,7 +2,7 @@ SET SQL_SAFE_UPDATES = 0;
 
 -- ============================================
 -- File: update_created_at_by_2_years.sql
--- Description: This script updates the 'created_at' columns by adding 7 years.
+-- Description: This script updates the 'created_at' columns by adding 2 years.
 --              - For the website_pageviews table, updates are run in 3 batches.
 --              - For products, orders, and order_items, a single update is run.
 -- NOTE: Make sure to back up your data before running these updates.
