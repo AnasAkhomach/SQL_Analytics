@@ -74,7 +74,6 @@ select
     count(distinct case when website_sessions.utm_source = 'bsearch' then website_sessions.website_session_id else null end) as bsearch_paid_session,
     count(distinct case when website_sessions.utm_source is null and website_sessions.http_referer is not null 
                         then website_sessions.website_session_id else null end) as organic_search_session,
-                        
 	count(distinct case when website_sessions.utm_source is null and website_sessions.http_referer is null 
                         then website_sessions.website_session_id else null end) as direct_type_in_session
 from website_sessions
