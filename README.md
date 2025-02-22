@@ -1,95 +1,96 @@
-Here’s the updated `README.md` integrating the new project while maintaining consistency with the existing structure:
-
----
-
-# SQL & Tableau Analytics Projects
+# SQL Analytics Projects
 
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/AnasAkhomach/SQL_Analytics)
-[![Tableau](https://img.shields.io/badge/Tableau-Public-orange?logo=tableau)](https://public.tableau.com/app/profile/yourprofile)
 [![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
 
-Welcome to my **SQL & Tableau Analytics Projects** repository! This repository contains advanced SQL analyses and Tableau dashboards for real-world business problems across industries like eCommerce and EdTech.
+Welcome to the **SQL Analytics Project** repository! This repository contains advanced SQL analyses for an eCommerce database (`mavenfuzzyfactory`), solving real-world business problems like traffic analysis, conversion funnels, A/B testing, and trend analysis.
 
 ---
 
 ## 📋 Overview
-This repository includes two types of projects:
-1. **eCommerce Analytics** (12 tasks) with SQL queries for `mavenfuzzyfactory` database.
-2. **Customer Engagement Analysis** (EdTech) combining SQL and Tableau for interactive dashboards.
+This project includes **12 tasks** analyzing critical business metrics such as:
+- Traffic source breakdowns
+- Conversion rate optimization
+- Bounce rate analysis
+- Landing page A/B testing
+- Conversion funnel drop-offs
+- Billing page performance
 
 ---
 
 ## 🗂️ Projects
+### 1. **Site Traffic Breakdown**  
+**Date:** April 12, 2012  
+**Objective:** Analyze traffic sources by UTM parameters.  
+**Key Files:**  
+- [SQL Query](queries/traffic_breakdown.sql)  
 
-### **I. eCommerce Analytics**  
-**Database**: `mavenfuzzyfactory`  
-**Tools**: SQL  
-**Tasks**:  
+### 2. **Gsearch Nonbrand Conversion Rate**  
+**Date:** April 14, 2012  
+**Objective:** Calculate conversion rate (CVR) for `gsearch nonbrand` traffic.  
+**Key Files:**  
+- [SQL Query](queries/gsearch_conversion_rate.sql)  
 
-| #  | Project                          | Key Objective                          | SQL File                               |
-|----|----------------------------------|----------------------------------------|----------------------------------------|
-| 1  | Site Traffic Breakdown           | Analyze traffic sources by UTM params  | [traffic_breakdown.sql](queries/traffic_breakdown.sql) |
-| 2  | Gsearch Nonbrand Conversion Rate | Calculate CVR for `gsearch nonbrand`   | [gsearch_conversion_rate.sql](queries/gsearch_conversion_rate.sql) |
-| ...| ...                              | ...                                    | ...                                    |
-| 12 | Billing Page A/B Test            | Compare `/billing` vs. `/billing-2`    | [billing_ab_test.sql](queries/billing_ab_test.sql) |
+### 3. **Gsearch Nonbrand Weekly Trends**  
+**Date:** May 10, 2012  
+**Objective:** Analyze weekly session trends post-bid adjustment.  
+**Key Files:**  
+- [SQL Query](queries/gsearch_weekly_trends.sql)  
+
+### 4. **Device-Level Conversion Rates**  
+**Date:** May 11, 2012  
+**Objective:** Compare desktop vs. mobile conversion rates.  
+**Key Files:**  
+- [SQL Query](queries/device_conversion_rates.sql)  
+
+### 5. **Gsearch Device-Level Weekly Trends**  
+**Date:** June 9, 2012  
+**Objective:** Evaluate bid adjustments' impact on desktop/mobile traffic.  
+**Key Files:**  
+- [SQL Query](queries/device_weekly_trends.sql)  
+
+### 6. **Top Website Pages**  
+**Date:** June 9, 2012  
+**Objective:** Identify most-viewed pages by session volume.  
+**Key Files:**  
+- [SQL Query](queries/top_pages.sql)  
+
+### 7. **Top Entry Pages**  
+**Date:** June 12, 2012  
+**Objective:** Rank entry pages by session volume.  
+**Key Files:**  
+- [SQL Query](queries/top_entry_pages.sql)  
+
+### 8. **Bounce Rate Analysis**  
+**Date:** June 14, 2012  
+**Objective:** Calculate homepage bounce rate.  
+**Key Files:**  
+- [SQL Query](queries/bounce_rate_analysis.sql)  
+
+### 9. **Landing Page A/B Test**  
+**Date:** July 28, 2012  
+**Objective:** Compare `/home` vs. `/lander-1` bounce rates.  
+**Key Files:**  
+- [SQL Query](queries/lander_ab_test.sql)  
+
+### 10. **Weekly Landing Page Trends**  
+**Date:** August 31, 2012  
+**Objective:** Track weekly traffic and bounce rate trends.  
+**Key Files:**  
+- [SQL Query](queries/weekly_trends.sql)  
+
+### 11. **Conversion Funnel Analysis**  
+**Date:** September 5, 2012  
+**Objective:** Analyze user drop-offs from `/lander-1` to order confirmation.  
+**Key Files:**  
+- [SQL Query](queries/conversion_funnel.sql)  
+
+### 12. **Billing Page A/B Test**  
+**Date:** November 10, 2012  
+**Objective:** Compare conversion rates of `/billing` vs. `/billing-2`.  
+**Key Files:**  
+- [SQL Query](queries/billing_ab_test.sql)  
 
 ---
 
-### **II. Customer Engagement Analysis (EdTech)**  
-**Database**: `365_database`  
-**Tools**: SQL + Tableau  
-**Objective**: Analyze student engagement on an online learning platform to optimize course content, onboarding, and retention.  
-
-#### **📌 Key Deliverables**  
-1. **3-Page Interactive Dashboard** in Tableau ([View on Tableau Public](https://public.tableau.com/app/profile/yourprofile)).
-2. **SQL Queries** for data extraction and aggregation.
-3. **Business Insights** on course popularity, seasonal trends, and geographic engagement.
-
-#### **🔍 Analysis & Insights**  
-| Section                      | Key Metrics                              | Tools Used    |
-|------------------------------|------------------------------------------|---------------|
-| Course Performance           | Total minutes watched, avg. ratings      | SQL, Tableau  |
-| Student Onboarding Trends    | Monthly registrations, onboarding rate   | SQL, Tableau  |
-| Engagement by Subscription   | Free vs. paid user engagement            | SQL, Tableau  |
-| Geographic Insights          | Top countries by registrations & minutes | SQL, Tableau  |
-
-**✅ Critical Findings**:  
-- Paid users watched **3x more content** than free users.  
-- Onboarding rates averaged **45%** with seasonal spikes in January/September.  
-- Top 5 courses had **4.5+ ratings** but needed content updates for retention.  
-
-#### **📂 Project Files**  
-- **SQL Queries**: [`/sql_queries/edtech_engagement/`](sql_queries/edtech_engagement/)  
-- **Tableau Workbook**: [`/dashboards/customer_engagement.twbx`](dashboards/customer_engagement.twbx)  
-- **Report**: [`/reports/edtech_engagement.md`](reports/edtech_engagement.md)  
-
----
-
-## 🏗️ Repository Structure  
-```
-├── README.md                  <- Overview & project catalog
-├── data/                      <- Sample datasets (if applicable)
-├── sql_queries/               <- SQL scripts
-│   ├── ecommerce/            <- 12 eCommerce tasks
-│   └── edtech_engagement/    <- Customer Engagement Analysis
-├── dashboards/                <- Tableau/Power BI files
-│   └── customer_engagement.twbx  
-├── reports/                   <- Markdown/PDF reports
-└── LICENSE
-```
-
----
-
-## 🔗 Executive Summary for LinkedIn  
-🚀 **Customer Engagement Analysis with SQL & Tableau**  
-I analyzed **student engagement** for an EdTech platform to optimize retention and content strategy. Key insights:  
-✔ **Paid users watched 3x more** than free users  
-✔ **45% onboarding rate** with drop-offs after 30 days  
-✔ **Seasonal spikes in Jan/Sep** for registrations  
-✔ **Localization opportunities** in Nigeria & India  
-
-[View full project on GitHub](https://github.com/yourprofile/SQL_Analytics) | [Interactive Dashboard](https://public.tableau.com/app/profile/yourprofile)  
-
----
-
-**📧 Contact**: [your.email@domain.com](mailto:your.email@domain.com) | **💼 LinkedIn**: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)  
+## 🏗️ Repository Structure
